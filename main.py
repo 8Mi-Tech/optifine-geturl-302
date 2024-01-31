@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, redirect
 import httpx
-import semver
 import re
 
 app = Flask(__name__)
