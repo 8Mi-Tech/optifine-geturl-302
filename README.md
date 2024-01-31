@@ -5,3 +5,5 @@
 一个小小的 API，根据 filename 自动抓取网页返回并下载链接
 
 filename: https://zkitefly.github.io/optifine-download-list/
+
+测试链接: https://of-302v.zkitefly.eu.org/file/OptiFine_1.20.1_HD_U_I6.jar
