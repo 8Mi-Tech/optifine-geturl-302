@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, redirect, make_response
+from flask import Flask, jsonify, redirect
 from flask_caching import Cache
 import httpx
 
@@ -12,7 +12,7 @@ def fetch_file(file_name):
         "code": 404,
         "message": "File not found."
     }
-    if "OptiFine_" not in file_name and not file_name.endswith(".jar"):
+    if "OptiFine_" not in file_name or not file_name.endswith(".jar"):
         return jsonify(error_response), 404
 
     url = f"https://optifine.net/adloadx?f={file_name}"
@@ -24,7 +24,7 @@ def fetch_file(file_name):
     # Check if the download link is valid
     download_response = httpx.head(download_link)
     if download_response.status_code != 200 or 'Content-Disposition' not in download_response.headers:
-        # Check the version list
+        # Check the bmclapi version list
         version_list_response = httpx.get("https://bmclapi2.bangbang93.com/optifine/versionList")
         if version_list_response.status_code != 200:
             return jsonify(error_response), 404
@@ -40,6 +40,9 @@ def fetch_file(file_name):
                 return redirect_response
         # If the file name is not found in the version list
         return jsonify(error_response), 404
+
+    # If the download link is valid, return a redirect response
+    return redirect(download_link)
 
 if __name__ == "__main__":
     app.run()
