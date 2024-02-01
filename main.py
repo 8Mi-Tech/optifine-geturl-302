@@ -26,7 +26,7 @@ def fetch_file(file_name):
         }
         return jsonify(error_response), 404
 
-    redirect_response = make_redirect_response(redirect(download_link))
+    redirect_response = redirect(download_link)
     redirect_response.headers['X-Counter'] = '300' # Add the X-Counter header
     return redirect_response
 
