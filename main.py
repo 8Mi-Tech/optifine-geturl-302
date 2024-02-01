@@ -3,10 +3,10 @@ from flask_caching import Cache
 import httpx
 
 app = Flask(__name__)
-cache = Cache(app, config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 300})  # 300 seconds = 5 minutes
+cache = Cache(app, config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 300})  # 60 seconds = 1 minutes
 
 @app.route('/file/<path:file_name>')
-@cache.cached(timeout=300)  # Cache the response for 5 minutes
+@cache.cached(timeout=60)  # Cache the response for 1 minutes
 def fetch_file(file_name):
     url = f"https://optifine.net/adloadx?f={file_name}"
     
@@ -27,7 +27,7 @@ def fetch_file(file_name):
         return jsonify(error_response), 404
 
     redirect_response = redirect(download_link)
-    redirect_response.headers['Cache-Control'] = 'max-age=0, s-maxage=300' # Add the Cache-Control header, https://vercel.com/docs/edge-network/headers#recommended-settings
+    redirect_response.headers['Cache-Control'] = 'max-age=0, s-maxage=60' # Add the Cache-Control header, https://vercel.com/docs/edge-network/headers#recommended-settings
     return redirect_response
 
 if __name__ == "__main__":
