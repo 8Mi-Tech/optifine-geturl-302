@@ -27,7 +27,7 @@ def fetch_file(file_name):
         return jsonify(error_response), 404
 
     redirect_response = redirect(download_link)
-    redirect_response.headers['X-Counter'] = '300' # Add the X-Counter header
+    redirect_response.headers['Cache-Control'] = 'max-age=0, s-maxage=300' # Add the Cache-Control header, https://vercel.com/docs/edge-network/headers#recommended-settings
     return redirect_response
 
 if __name__ == "__main__":
