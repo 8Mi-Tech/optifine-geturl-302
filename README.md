@@ -6,4 +6,4 @@
 
 filename: https://zkitefly.github.io/optifine-download-list/
 
-测试链接: https://of-302v.zkitefly.eu.org/file/OptiFine_1.20.1_HD_U_I6.jar
+测试链接: https://of-302v.zkitefly.eu.org/file/OptiFine_1.20.1_HD_U_I6.jar | https://of-302-v.8mi.edu.pl/file/OptiFine_1.20.1_HD_U_I6.jar
