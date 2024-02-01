@@ -1,10 +1,12 @@
-from flask import Flask, jsonify, redirect
+from flask import Flask, jsonify, redirect, make_response
+from flask_caching import Cache
 import httpx
-import re
 
 app = Flask(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': 300})  # 300 seconds = 5 minutes
 
 @app.route('/file/<path:file_name>')
+@cache.cached(timeout=300)  # Cache the response for 5 minutes
 def fetch_file(file_name):
     url = f"https://optifine.net/adloadx?f={file_name}"
     
@@ -24,7 +26,9 @@ def fetch_file(file_name):
         }
         return jsonify(error_response), 404
 
-    return redirect(download_link)
+    redirect_response = make_redirect_response(redirect(download_link))
+    redirect_response.headers['X-Counter'] = '300' # Add the X-Counter header
+    return redirect_response
 
 if __name__ == "__main__":
     app.run()
