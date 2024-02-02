@@ -35,14 +35,16 @@ def fetch_file(file_name):
                 patch = version_info['patch']
                 optifine_type = version_info['type']
                 redirect_url = f"https://bmclapi2.bangbang93.com/optifine/{mc_version}/{optifine_type}/{patch}"
-                redirect_response = redirect(redirect_url)
-                redirect_response.headers['Cache-Control'] = 'max-age=0, s-maxage=300'
-                return redirect_response
+                bmclapi_redirect_response = redirect(redirect_url)
+                bmclapi_redirect_response.headers['Cache-Control'] = 'max-age=0, s-maxage=300' # Add the Cache-Control header, https://vercel.com/docs/edge-network/headers#recommended-settings
+                return bmclapi_redirect_response
         # If the file name is not found in the version list
         return jsonify(error_response), 404
 
     # If the download link is valid, return a redirect response
-    return redirect(download_link)
+    redirect_response = redirect(download_link)
+    redirect_response.headers['Cache-Control'] = 'max-age=0, s-maxage=300' # Add the Cache-Control header, https://vercel.com/docs/edge-network/headers#recommended-settings
+    return redirect_response
 
 if __name__ == "__main__":
     app.run()
