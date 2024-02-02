@@ -1,6 +1,6 @@
 # optifine-downloadfile-302
 
-一个小小的 API，根据 fileName 自动抓取并返回 [OptiFine 官网页面](https://optifine.net)的下载链接。
+一个小小的 API，根据请求的文件名自动抓取并返回 [OptiFine 官网页面](https://optifine.net)的下载链接。
 
 ## 部署
 
@@ -28,7 +28,7 @@ GET {apiRoot}/file/{fileName}
 
 - `{apiRoot}` 为该 API 的域名，类似于：`https://of-302v.zkitefly.eu.org`
 
-- `{fineName}` 为需要下载的文件名称，该文件名必须含有 `OptiFine_` 和 `.jar`，否则将返回 `404 Not Found` 状态码。
+- `{fineName}` 为需要下载的文件名，该文件名必须含有 `OptiFine_` 和 `.jar`，否则将返回 `404 Not Found` 状态码。
 
 ## 抓取策略
 
