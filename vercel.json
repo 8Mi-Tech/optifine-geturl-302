@@ -1,8 +1,5 @@
 {
-    "builds": [
-        { "src": "main.py", "use": "@vercel/python" }
-    ],
-    "routes": [
-        { "src": "/file/.*", "dest": "main.py" }
-    ]
+    "builds": [{ "src": "main.py", "use": "@vercel/python" }],
+    "routes": [{ "src": "/file/.*", "dest": "main.py" }],
+    "regions": ["hkg1"]
 }
